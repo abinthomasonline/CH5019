@@ -1,0 +1,103 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage[margin=1in,footskip=0.25in]{geometry}
+\usepackage{float}
+\usepackage[bottom]{footmisc}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{hyphenat}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+\usepackage[sfdefault,light]{roboto}
+\usepackage[T1]{fontenc}
+
+\newcommand*{\ppl}{\fontfamily{ppl}\selectfont}
+
+\title{\textbf{CH5019 -- Mathematical Foundations of Data Science} \\ \vspace{1ex}\ppl{Term Project}}
+\date{\vspace{-15ex}}
+
+\begin{document}
+	
+	\setlength{\parindent}{0pt}
+	\parskip = \baselineskip
+	
+	\maketitle
+
+	\line(1,0){455}
+	\vspace{0.5ex}	
+	\textit{January-May 2018 Semester} \hfill \textbf{13th April 2018}
+	\vspace{-1.9ex}
+	\line(1,0){455}
+	
+	
+	\section*{Question 1}
+		
+	Write your own code to fit a logistic regression model to the data set described below in a programming language of your choice. (\textbf{IMPORTANT: DO NOT USE ANY IN-BUILT LIBRARIES}) \\
+	
+	\textbf{Description of Data Set 1:}
+	
+	This data set describes the operating conditions of a reactor and contains class labels about whether the reactor will operate or fail under those operating conditions. Your job is to construct a logistic regression model to predict the same. 
+	
+	\begin{itemize}
+		\item \texttt{q1\_data\_matrix.csv}: This file contains a $ 1000 \times 5 $ data matrix. The 5 features are the operating conditions of the reactor; their corresponding ranges are described below:
+		\begin{enumerate}
+			\item \textbf{Temperature:} 400-700 K
+			\item \textbf{Pressure:} 1-50 bar
+			\item \textbf{Feed Flow Rate:} 50-200 kmol/hr
+			\item \textbf{Coolant Flow Rate:} 1000-3600 L/hr
+			\item \textbf{Inlet Reactant Concentration:} 0.1-0.5 mol fraction
+		\end{enumerate}
+		\item \texttt{q1\_labels.csv}: This file contains a $ 1000 \times 1 $ vector of 0/1 labels for whether the reactor will operate or fail under the corresponding operating conditions. 
+		\begin{itemize}
+			\item 0: The reactor will operate well under the operating conditions
+			\item 1: The reactor fails under the operating conditions
+		\end{itemize}
+	\end{itemize}
+
+	\textbf{Some General Guidelines:}
+	
+	\begin{enumerate}
+		\item Partition your data into a training set and a test set. Keep \textbf{70\%} of your data for \textbf{training} and set aside the remaining \textbf{30\%} for \textbf{testing}.
+		\item Fit a logistic regression model on the training set. Choose an appropriate objective function to quantify classification error. \textbf{Manually code for the gradient descent procedure} used to find optimum model parameters. (\textbf{Note:} You may need to perform multiple initializations to avoid local minima)
+		\item Evaluate the performance of above model on your test data. Report the \textbf{confusion matrix} and the \textbf{$ F_1 $ Score}.
+	\end{enumerate}
+
+	\section*{Question 2}
+	
+	Use the same code developed in Question 1 to fit a logistic regression model to the dataset described below.
+	
+	\textbf{Description of Data Set 2:}
+	
+	This data set contains data for credit card fraud detection. 
+	
+	\begin{itemize}
+		\item \texttt{q2\_data\_matrix.csv}: This file contains a $ 100 \times 5 $ data matrix. The 5 features and their corresponding ranges are described below:
+		\begin{enumerate}
+			\item \textbf{Age:} 18-100 years
+			\item \textbf{Transaction Amount:} \$ 0-5000
+			\item \textbf{Total Monthly Transactions:} \$ 0-50000
+			\item \textbf{Annual Income:} \$ 30000-1000000
+			\item \textbf{Gender:} 0/1 (0 - Male, 1 - Female)
+		\end{enumerate}
+		\item \texttt{q2\_labels.csv}: This file contains a $ 1000 \times 1 $ vector of 0/1 labels for whether the transaction is fraudulent or not. 
+		\begin{itemize}
+			\item 0: The transaction is legitimate
+			\item 1: The transaction is fraudulent
+		\end{itemize}
+	\end{itemize}
+
+	\begin{enumerate}
+		\item Report the confusion matrix and the $ F_1 $ Score for this data set.
+		\item Which data set gives better results better? Can you think of reasons as to why one data set gives better results than the other? (\textbf{Hint:} Think of assumptions behind the logistic regression model)
+		\item Can you suggest improvements to the logistic regression model to make it perform better on the unfavorable data set? 
+		\item \textbf{Bonus Points!}: Implement your suggested improvement as a code and compare the performance of this with vanilla logistic regression. 
+	\end{enumerate}
+	
+ 
+	
+	 
+	
+\end{document}
