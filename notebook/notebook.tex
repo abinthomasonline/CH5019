@@ -1,0 +1,1338 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Term Project}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{question-1}{%
+\section{Question 1}\label{question-1}}
+
+    Write your own code to fit a logistic regression model to the data set
+described below in a pro- gramming language of your choice.
+(\textbf{IMPORTANT: DO NOT USE ANY IN-BUILT LIBRARIES})
+
+    \hypertarget{description-of-data-set-1}{%
+\paragraph{Description of Data Set 1:}\label{description-of-data-set-1}}
+
+    This data set describes the operating conditions of a reactor and
+contains class labels about whether the reactor will operate or fail
+under those operating conditions. Your job is to construct a logistic
+regression model to predict the same.
+
+\begin{itemize}
+\item
+  \textbf{q1\_data\_matrix.csv}: This file contains a 1000 × 5 data
+  matrix. The 5 features are the operating conditions of the reactor;
+  their corresponding ranges are described below:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Temperature:} 400-700 K
+  \item
+    \textbf{Pressure:} 1-50 bar
+  \item
+    \textbf{Feed Flow Rate:} 50-200 kmol/hr
+  \item
+    \textbf{Coolant Flow Rate:} 1000-3600 L/hr
+  \item
+    \textbf{Inlet Reactant Concentration:} 0.1-0.5 mol fraction
+  \end{enumerate}
+\item
+  \textbf{q1\_labels.csv}: This file contains a 1000 × 1 vector of 0/1
+  labels for whether the reactor will operate or fail under the
+  corresponding operating conditions.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    0: The reactor will operate well under the operating conditions
+  \item
+    1: The reactor fails under the operating conditions
+  \end{itemize}
+\end{itemize}
+
+    \hypertarget{some-general-guidelines}{%
+\paragraph{Some General Guidelines:}\label{some-general-guidelines}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Partition your data into a training set and a test set. Keep
+  \textbf{70\%} of your data for \textbf{training} and set aside the
+  remaining \textbf{30\%} for \textbf{testing.}
+\item
+  Fit a logistic regression model on the training set. Choose an
+  appropriate objective function to quantify classification error.
+  \textbf{Manually code for the gradient descent procedure} used to find
+  optimum model parameters. (\textbf{Note:} You may need to perform
+  multiple initializations to avoid local minima)
+\item
+  Evaluate the performance of above model on your test data. Report the
+  \textbf{confusion matrix} and the F1 \textbf{Score}.
+\end{enumerate}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \hypertarget{solution}{%
+\section{Solution}\label{solution}}
+
+    \hypertarget{import-libraries}{%
+\subsubsection{Import Libraries}\label{import-libraries}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    \hypertarget{load-data}{%
+\subsubsection{Load data}\label{load-data}}
+
+Use \texttt{pandas.read\_csv} method to load data and label the columns
+accordingly.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{features} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/q1\PYZus{}data\PYZus{}matrix.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{press}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ffr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cfr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{irc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{labels} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/q1\PYZus{}labels.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{oper}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{data-exploration}{%
+\subsubsection{Data Exploration}\label{data-exploration}}
+
+Have a look on the first few rows using \texttt{pandas.DataFrame.head}
+method.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{features}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}      temp  press     ffr      cfr     irc
+        0  406.86  17.66  121.83  2109.20  0.1033
+        1  693.39  24.66  133.18  3138.96  0.3785
+        2  523.10  23.23  146.55  1058.24  0.4799
+        3  612.86  40.97   94.44  1325.12  0.3147
+        4  500.28  37.44  185.48  2474.51  0.2284
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{labels}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}    oper
+        0   0.0
+        1   0.0
+        2   1.0
+        3   1.0
+        4   0.0
+\end{Verbatim}
+            
+    All features are real numbers so no encoding required. Get the number of
+samples using \texttt{pandas.DataFrame.shape} method.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 1000
+\end{Verbatim}
+            
+    As the number is just 1000 no need to use batch or stochastic methods
+for gradient descent. Use \texttt{pandas.DataFrame.isnull} \&
+\texttt{pandas.DataFrame.sum} together to get the count of rows with
+null values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{features}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} temp     0
+        press    0
+        ffr      0
+        cfr      0
+        irc      0
+        dtype: int64
+\end{Verbatim}
+            
+    There is no null values in the data. No need to drop any rows. Find the
+distribution of samples across two classes using
+\texttt{pandas.Series.value\_counts}.
+
+    \hypertarget{split-data}{%
+\subsubsection{Split Data}\label{split-data}}
+
+    Split data into train and test, 70\% and 30\% respectively using
+\texttt{numpy.split}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{p}{[}\PY{n}{train\PYZus{}X}\PY{p}{,} \PY{n}{test\PYZus{}X}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.7}\PY{o}{*}\PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{p}{[}\PY{n}{train\PYZus{}Y}\PY{p}{,} \PY{n}{test\PYZus{}Y}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.7}\PY{o}{*}\PY{n}{labels}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    Check distribution of samples across the classes in the training set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{train\PYZus{}Y}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{oper}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 0.0    398
+        1.0    302
+        Name: oper, dtype: int64
+\end{Verbatim}
+            
+    Both the classes are sufficiently represented.
+
+    \hypertarget{feature-scaling}{%
+\subsubsection{Feature Scaling}\label{feature-scaling}}
+
+    Subtract every feature by corresponding mean and divide by corresponding
+standard deviation. Use \texttt{pandas.DataFrame.mean} and
+\texttt{pandas.DataFrame.std} for mean and standard deviation
+respectively.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{X} \PY{o}{=} \PY{p}{(}\PY{n}{train\PYZus{}X}\PY{o}{\PYZhy{}}\PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+        \PY{n}{X}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}        temp     press       ffr       cfr       irc
+        0 -1.598642 -0.534905 -0.063694 -0.207417 -1.705472
+        1  1.685504 -0.044677  0.200960  1.142378  0.689765
+        2 -0.266323 -0.144823  0.512715 -1.585001  1.572312
+        3  0.762487  1.097555 -0.702361 -1.235179  0.134473
+        4 -0.527881  0.850340  1.420466  0.271426 -0.616649
+\end{Verbatim}
+            
+    \hypertarget{bias-term}{%
+\subsubsection{Bias Term}\label{bias-term}}
+
+    Add a column of all ones to train\_X.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{X}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bias}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{X}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}    bias      temp     press       ffr       cfr       irc
+         0     1 -1.598642 -0.534905 -0.063694 -0.207417 -1.705472
+         1     1  1.685504 -0.044677  0.200960  1.142378  0.689765
+         2     1 -0.266323 -0.144823  0.512715 -1.585001  1.572312
+         3     1  0.762487  1.097555 -0.702361 -1.235179  0.134473
+         4     1 -0.527881  0.850340  1.420466  0.271426 -0.616649
+\end{Verbatim}
+            
+    \hypertarget{sigmoid}{%
+\subsubsection{Sigmoid}\label{sigmoid}}
+
+    Define a function \texttt{sigmoid} that computes sigmoid of input
+values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{sigmoid}\PY{p}{(}\PY{n}{z}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{z}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sigmoid}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 0.5
+\end{Verbatim}
+            
+    \hypertarget{loss}{%
+\subsubsection{Loss}\label{loss}}
+
+    Define a function \texttt{cost} that computes loss given prediction and
+labels.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{cost}\PY{p}{(}\PY{n}{probability}\PY{p}{,} \PY{n}{label}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{label}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{probability}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{label}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{probability}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{gradient}{%
+\subsubsection{Gradient}\label{gradient}}
+
+    Define \texttt{gradient} function that computes gradient with respect to
+each parameter given features, labels and parameters.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{gradient}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{parameters}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{p}{:}
+             \PY{n}{h} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{h}\PY{o}{\PYZhy{}}\PY{n}{labels}\PY{p}{)}\PY{o}{/}\PY{n}{labels}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{gradient-descent}{%
+\subsubsection{Gradient Descent}\label{gradient-descent}}
+
+    \texttt{gradient\_descent} function that performs iterations of gradient
+descent and returns parameters given features, labels, learning rate and
+number of iterations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{def} \PY{n+nf}{gradient\PYZus{}descent}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{,} \PY{n}{number\PYZus{}of\PYZus{}iterations}\PY{p}{)}\PY{p}{:}
+             \PY{n}{parameters} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{number\PYZus{}of\PYZus{}iterations}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{grad} \PY{o}{=} \PY{n}{gradient}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{parameters}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+                 \PY{n}{parameters} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{learning\PYZus{}rate}\PY{o}{*}\PY{n}{grad}
+                 \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}print(i+1, cost(sigmoid(np.dot(features, parameters)), labels), grad)\PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{k}{return} \PY{n}{parameters}
+\end{Verbatim}
+
+
+    \hypertarget{predict}{%
+\subsubsection{Predict}\label{predict}}
+
+    \texttt{predict} function that returns the predicted labels given
+features, parameters and threshold.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{parameters}\PY{p}{,} \PY{n}{threshold}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{parameters}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{threshold}
+\end{Verbatim}
+
+
+    \hypertarget{misclassification-error}{%
+\subsubsection{Misclassification Error}\label{misclassification-error}}
+
+    \texttt{misclassification\_error} function returns misclassification
+error.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predictions}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{p}{(}\PY{n}{predictions}\PY{o}{!=}\PY{n}{labels}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{driver-loop}{%
+\subsubsection{Driver Loop}\label{driver-loop}}
+
+    Do gradient descent to have an idea of the number of iterations at which
+cost from test set starts going up. Decrease learning rate gradually to
+avoid local minima and improve learning speed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{Y} \PY{o}{=} \PY{n}{train\PYZus{}Y}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{X\PYZus{}t} \PY{o}{=} \PY{p}{(}\PY{n}{test\PYZus{}X}\PY{o}{\PYZhy{}}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X\PYZus{}t}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bias}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Y\PYZus{}t} \PY{o}{=} \PY{n}{test\PYZus{}Y}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}
+         \PY{n}{theta\PYZus{}i} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}
+         \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.1}
+         \PY{n}{test\PYZus{}cost} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{1}
+         \PY{k}{while} \PY{l+m+mi}{1}\PY{p}{:}
+             \PY{n}{theta\PYZus{}i} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{alpha}\PY{o}{*}\PY{n}{gradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+             \PY{n}{train\PYZus{}cost} \PY{o}{=} \PY{n}{cost}\PY{p}{(}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+             \PY{n}{temp} \PY{o}{=} \PY{n}{cost}\PY{p}{(}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X\PYZus{}t}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}t}\PY{p}{)}
+             \PY{k}{if} \PY{n}{temp}\PY{o}{\PYZgt{}}\PY{n}{test\PYZus{}cost}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{alpha}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.000001}\PY{p}{:}
+                     \PY{n}{alpha}\PY{o}{/}\PY{o}{=}\PY{l+m+mi}{10}
+                     \PY{k}{continue}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{break}
+             \PY{n}{test\PYZus{}cost}\PY{o}{=}\PY{n}{temp}
+             \PY{n}{theta} \PY{o}{=} \PY{n}{theta\PYZus{}i}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{train\PYZus{}cost}\PY{p}{,} \PY{n}{test\PYZus{}cost}\PY{p}{)}
+             \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1632 0.2607241751931474 0.28092426348015925
+1633 0.2607238170484276 0.2809242528705977
+1634 0.26072346004264413 0.28092424282368694
+1635 0.26072310417203287 0.2809242333367292
+1636 0.2607227494328424 0.2809242244070373
+1637 0.26072239582133483 0.28092421603193496
+1638 0.2607220433337847 0.28092420820875647
+1639 0.2607216919664801 0.2809242009348467
+1640 0.26072134171572175 0.2809241942075615
+1641 0.2607209925778233 0.28092418802426683
+1642 0.26072064454911126 0.2809241823823395
+1643 0.26072029762592497 0.28092417727916674
+1644 0.26071995180461627 0.280924172712146
+1645 0.2607196070815501 0.28092416867868547
+1646 0.26071926345310364 0.28092416517620356
+1647 0.26071892091566706 0.28092416220212885
+1648 0.26071857946564253 0.28092415975390067
+1649 0.2607182390994454 0.28092415782896796
+1650 0.2607178998135029 0.2809241564247902
+1651 0.26071756160425497 0.2809241555388372
+1652 0.26071722446815376 0.28092415516858854
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train error : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test error : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}t}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}t}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train error :  0.05142857142857143
+Test error :  0.09
+[-1.01870462  0.1953828   0.66090329  0.63696202 -3.55495908  0.09227634]
+
+    \end{Verbatim}
+
+    Perform iterations of \texttt{gradient\_descent} with multiple
+initialization and print misclassification error.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+             \PY{n}{theta\PYZus{}i} \PY{o}{=} \PY{n}{gradient\PYZus{}descent}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mi}{1600}\PY{p}{)}
+             \PY{n}{mc\PYZus{}error\PYZus{}train} \PY{o}{=} \PY{n}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+             \PY{n}{mc\PYZus{}error\PYZus{}test} \PY{o}{=} \PY{n}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}t}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}t}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{mc\PYZus{}error\PYZus{}train}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{mc\PYZus{}error\PYZus{}test}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1 0.0657 0.1033 [-5.03095568e-01 -1.70836523e-04  4.13488166e-01  4.74309265e-01
+ -2.28682538e+00  7.13150376e-02]
+2 0.0557 0.1067 [-0.50793752  0.15955294  0.38612939  0.2182976  -2.01009079  0.02718853]
+3 0.0714 0.0967 [-0.73935068  0.25043545  0.82796664  0.7904199  -2.77355241  0.2764856 ]
+4 0.0543 0.1133 [-0.44161326  0.16144658  0.33502178  0.29459462 -1.93068409  0.05319208]
+5 0.0686 0.12 [-0.39112786  0.16357119  0.38356913  0.32158721 -1.9926219  -0.01844572]
+6 0.06 0.1 [-0.52217244  0.16915082  0.28612531  0.28363751 -2.12382762 -0.07722074]
+7 0.0986 0.1067 [-0.62453088  0.16510281  0.12756448  0.01144191 -2.32428645 -0.23065443]
+8 0.06 0.1133 [-0.48234724  0.1757505   0.44621613  0.30844267 -1.96755287  0.02011711]
+9 0.0771 0.11 [-0.43312925  0.06651961  0.26355579  0.43734356 -2.20894872  0.04208882]
+10 0.0586 0.1167 [-0.48749015  0.14104629  0.43446645  0.27731126 -1.9194208   0.05177214]
+11 0.0671 0.1067 [-0.47859503  0.01657322  0.46685402  0.37200293 -2.22441285 -0.00238295]
+12 0.0671 0.1067 [-0.38397004  0.08867232  0.30797557  0.29898019 -1.89682828  0.07706732]
+13 0.06 0.1 [-0.48244766  0.01191927  0.39897224  0.28682776 -2.18333109  0.07473783]
+14 0.0686 0.1033 [-0.45565164  0.11617079  0.25989494  0.35206494 -2.12013462  0.00776301]
+15 0.0771 0.1033 [-0.52386375 -0.09849776  0.35240341  0.27426714 -2.4493133  -0.01554331]
+16 0.0514 0.0933 [-0.56893082  0.08973322  0.34965325  0.3992079  -2.13750049  0.04141368]
+17 0.0614 0.11 [-4.57267220e-01 -1.15881266e-03  3.65244498e-01  2.37134707e-01
+ -2.00484994e+00  8.26189217e-02]
+18 0.0657 0.1167 [-0.36943317  0.06592287  0.37013719  0.29248337 -2.02331092  0.04618403]
+19 0.0786 0.12 [-0.40130605 -0.00530211  0.23703365  0.43881198 -2.61162416  0.04134634]
+20 0.0686 0.1 [-0.4205923   0.16365063  0.19949386  0.28583786 -1.83260377 -0.05965412]
+
+    \end{Verbatim}
+
+    Choose theta with best performance.
+
+    \hypertarget{confusion-matrix}{%
+\subsubsection{Confusion Matrix}\label{confusion-matrix}}
+
+    \texttt{confusion\_matrix} function which returns confusion matrix given
+predicted labels and original labels.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{predictions}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{p}{:}
+             \PY{n}{true\PYZus{}positives} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{predictions}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{false\PYZus{}positives} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{predictions}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}not}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{false\PYZus{}negatives} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}not}\PY{p}{(}\PY{n}{predictions}\PY{p}{)}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{true\PYZus{}negatives} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}not}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}or}\PY{p}{(}\PY{n}{predictions}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{true\PYZus{}negatives}\PY{p}{,} \PY{n}{false\PYZus{}negatives}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{n}{false\PYZus{}positives}\PY{p}{,} \PY{n}{true\PYZus{}positives}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Actual 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Actual 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{X} \PY{o}{=} \PY{p}{(}\PY{n}{features}\PY{o}{\PYZhy{}}\PY{n}{features}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{features}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bias}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{labels}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{CF} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         \PY{n}{CF}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}           Predicted 0  Predicted 1
+         Actual 0          550           35
+         Actual 1           22          393
+\end{Verbatim}
+            
+    \hypertarget{f1-score}{%
+\subsubsection{F1 Score}\label{f1-score}}
+
+    \texttt{f1\_score} function calculates F1 score given confusion matrix.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{def} \PY{n+nf}{f1\PYZus{}score}\PY{p}{(}\PY{n}{confusion\PYZus{}matrix}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{confusion\PYZus{}matrix}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Actual 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{confusion\PYZus{}matrix}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Actual 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{+}\PY{n}{confusion\PYZus{}matrix}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted 0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Actual 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{+}\PY{n}{confusion\PYZus{}matrix}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Actual 0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{f1\PYZus{}score}\PY{p}{(}\PY{n}{CF}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 0.9323843416370107
+\end{Verbatim}
+            
+    \hypertarget{question-2}{%
+\section{Question 2}\label{question-2}}
+
+    Use the same code developed in Question 1 to fit a logistic regression
+model to the dataset described below.
+
+    \hypertarget{description-of-data-set-2}{%
+\paragraph{Description of Data Set 2:}\label{description-of-data-set-2}}
+
+    This data set contains data for credit card fraud detection.
+
+\begin{itemize}
+\item
+  \textbf{q2\_data\_matrix.csv:} This file contains a 100 × 5 data
+  matrix. The 5 features and their corresponding ranges are described
+  below:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Age:} 18-100 years
+  \item
+    \textbf{Transaction Amount:} \$ 0-5000
+  \item
+    \textbf{Total Monthly Transactions:} \$ 0-50000
+  \item
+    \textbf{Annual Income:} \$ 30000-1000000
+  \item
+    \textbf{Gender:} 0/1 (0 - Male, 1 - Female)
+  \end{enumerate}
+\item
+  \textbf{q2\_labels.csv:} This file contains a 1000 × 1 vector of 0/1
+  labels for whether the transaction is fraudulent or not.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    0: The transaction is legitimate
+  \item
+    1: The transaction is fraudulent
+  \end{itemize}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Report the confusion matrix and the F1 Score for this data set.
+\item
+  Which data set gives better results better? Can you think of reasons
+  as to why one data set gives better results than the other?
+  (\textbf{Hint}: Think of assumptions behind the logistic regression
+  model)
+\item
+  Can you suggest improvements to the logistic regression model to make
+  it perform better on the unfavorable data set?
+\item
+  \textbf{Bonus Points!}: Implement your suggested improvement as a code
+  and compare the performance of this with vanilla logistic regression.
+\end{enumerate}
+
+    \hypertarget{solution}{%
+\section{Solution}\label{solution}}
+
+    \hypertarget{load-data}{%
+\subsubsection{Load Data}\label{load-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{features} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/q2\PYZus{}data\PYZus{}matrix.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tomotr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{anin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{labels} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/q2\PYZus{}labels.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fra}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{data-exploration}{%
+\subsubsection{Data Exploration}\label{data-exploration}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{features}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:}     age    tram   tomotr      anin  gen
+         0  31.0  2897.0  49741.0  339500.0  1.0
+         1  46.0  2087.0  23953.0  935000.0  1.0
+         2  23.0  1814.0  26056.0  191700.0  0.0
+         3  94.0   179.0  30250.0  715900.0  0.0
+         4  26.0  3995.0  39466.0  711900.0  0.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{labels}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:}    fra
+         0  1.0
+         1  0.0
+         2  1.0
+         3  0.0
+         4  0.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} 1000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{features}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} age       0
+         tram      0
+         tomotr    0
+         anin      0
+         gen       0
+         dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{features}\PY{p}{,} \PY{n}{labels}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fra}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fra}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:}            age         tram        tomotr           anin       gen
+         fra                                                               
+         0.0  57.091483  2418.894322  22141.055205  643522.082019  0.479495
+         1.0  62.789617  2940.267760  30990.527322  311790.163934  0.543716
+\end{Verbatim}
+            
+    \hypertarget{split-data}{%
+\subsubsection{Split Data}\label{split-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{p}{[}\PY{n}{train\PYZus{}X}\PY{p}{,} \PY{n}{test\PYZus{}X}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.7}\PY{o}{*}\PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{p}{[}\PY{n}{train\PYZus{}Y}\PY{p}{,} \PY{n}{test\PYZus{}Y}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.7}\PY{o}{*}\PY{n}{labels}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    Check distribution of data samples across classes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{train\PYZus{}Y}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fra}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} 0.0    438
+         1.0    262
+         Name: fra, dtype: int64
+\end{Verbatim}
+            
+    Data distribution is around 60\%-40\%.
+
+    \hypertarget{feature-scaling}{%
+\subsubsection{Feature Scaling}\label{feature-scaling}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{X} \PY{o}{=} \PY{p}{(}\PY{n}{train\PYZus{}X}\PY{o}{\PYZhy{}}\PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:}         age      tram    tomotr      anin       gen
+         0 -1.212844  0.201788  1.676857 -0.634242  0.979496
+         1 -0.570286 -0.360923 -0.111253  1.534665  0.979496
+         2 -1.555542 -0.550577  0.034567 -1.172553 -1.019475
+         3  1.485901 -1.686419  0.325374  0.736668 -1.019475
+         4 -1.427031  0.964573  0.964401  0.722099 -1.019475
+\end{Verbatim}
+            
+    \hypertarget{bias-term}{%
+\subsubsection{Bias Term}\label{bias-term}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{X}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bias}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{X}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:}    bias       age      tram    tomotr      anin       gen
+         0     1 -1.212844  0.201788  1.676857 -0.634242  0.979496
+         1     1 -0.570286 -0.360923 -0.111253  1.534665  0.979496
+         2     1 -1.555542 -0.550577  0.034567 -1.172553 -1.019475
+         3     1  1.485901 -1.686419  0.325374  0.736668 -1.019475
+         4     1 -1.427031  0.964573  0.964401  0.722099 -1.019475
+\end{Verbatim}
+            
+    \hypertarget{driver-loop}{%
+\subsubsection{Driver Loop}\label{driver-loop}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{Y} \PY{o}{=} \PY{n}{train\PYZus{}Y}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{X\PYZus{}t} \PY{o}{=} \PY{p}{(}\PY{n}{test\PYZus{}X}\PY{o}{\PYZhy{}}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X\PYZus{}t}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bias}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Y\PYZus{}t} \PY{o}{=} \PY{n}{test\PYZus{}Y}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}
+         \PY{n}{theta\PYZus{}i} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}
+         \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.1}
+         \PY{n}{test\PYZus{}cost} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{1}
+         \PY{k}{while} \PY{l+m+mi}{1}\PY{p}{:}
+             \PY{n}{theta\PYZus{}i} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{alpha}\PY{o}{*}\PY{n}{gradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+             \PY{n}{train\PYZus{}cost} \PY{o}{=} \PY{n}{cost}\PY{p}{(}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+             \PY{n}{temp} \PY{o}{=} \PY{n}{cost}\PY{p}{(}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X\PYZus{}t}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}t}\PY{p}{)}
+             \PY{k}{if} \PY{n}{temp}\PY{o}{\PYZgt{}}\PY{n}{test\PYZus{}cost}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{alpha}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.000001}\PY{p}{:}
+                     \PY{n}{alpha}\PY{o}{/}\PY{o}{=}\PY{l+m+mi}{10}
+                     \PY{k}{continue}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{break}
+             \PY{n}{test\PYZus{}cost} \PY{o}{=} \PY{n}{temp}
+             \PY{n}{theta} \PY{o}{=} \PY{n}{theta\PYZus{}i}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{train\PYZus{}cost}\PY{p}{,} \PY{n}{test\PYZus{}cost}\PY{p}{)}
+             \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+10433 0.32503496086388933 0.3374106766366127
+10434 0.3250349608638893 0.3374106766366127
+10435 0.3250349608638892 0.3374106766366126
+10436 0.32503496086388933 0.3374106766366124
+10437 0.3250349608638893 0.3374106766366123
+10438 0.3250349608638892 0.33741067663661206
+10439 0.3250349608638893 0.3374106766366119
+10440 0.3250349608638892 0.3374106766366118
+10441 0.32503496086388933 0.3374106766366118
+10442 0.3250349608638892 0.3374106766366117
+10443 0.3250349608638892 0.3374106766366115
+10444 0.3250349608638893 0.33741067663661134
+10445 0.3250349608638892 0.33741067663661123
+10446 0.3250349608638892 0.337410676636611
+10447 0.32503496086388933 0.33741067663661084
+10448 0.32503496086388933 0.3374106766366107
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train error : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test error : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}t}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}t}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train error :  0.1
+Test error :  0.13
+[-1.19057535  0.54762267  0.87412537  1.45826855 -2.45583991  0.12145785]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+             \PY{n}{theta\PYZus{}i} \PY{o}{=} \PY{n}{gradient\PYZus{}descent}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+             \PY{n}{mc\PYZus{}error\PYZus{}train} \PY{o}{=} \PY{n}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+             \PY{n}{mc\PYZus{}error\PYZus{}test} \PY{o}{=} \PY{n}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}t}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}t}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{mc\PYZus{}error\PYZus{}train}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{mc\PYZus{}error\PYZus{}test}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1 0.1443 0.1267 [-0.80333384  0.30825477  0.27741166  0.73786549 -1.07156181 -0.02181775]
+2 0.1143 0.1433 [-0.45982168  0.09345891  0.42228359  0.7881262  -1.31119965  0.08785956]
+3 0.1329 0.15 [-0.29010296  0.21698243  0.23755198  0.93149722 -1.37764829  0.16540425]
+4 0.1343 0.1267 [-0.83064526  0.07637762  0.37376378  0.95240723 -1.44414594 -0.15371178]
+5 0.1414 0.13 [-0.95871433  0.65056088  0.26108463  1.12996367 -1.35267248  0.27247142]
+6 0.1771 0.2133 [-0.70488941  0.65644252  1.24130969  1.17727218 -1.44424639  0.06864588]
+7 0.1014 0.1033 [-0.60550231  0.18731487  0.25842826  0.6140183  -1.0639407  -0.04296883]
+8 0.1343 0.1533 [-0.48325583  0.1011045   0.50227935  0.792766   -0.98406597  0.02987987]
+9 0.1286 0.14 [-0.92440445  0.11582874  0.56008637  0.73457553 -1.58040824  0.25429075]
+10 0.1286 0.1533 [-0.26472031  0.26068041  0.12954925  0.60965837 -0.99593543  0.27094449]
+11 0.1229 0.1467 [-0.7212136   0.31425471  0.74593445  1.00714716 -1.63784677  0.0673217 ]
+12 0.17 0.1833 [-1.1460129   0.92113154 -0.23181316  0.8679345  -1.85512561  0.78895311]
+13 0.1357 0.1267 [-0.49686059  0.18045228  0.01858988  0.79172053 -1.01388701  0.13475207]
+14 0.1343 0.1733 [-0.72801025  0.01210963  0.69415785  0.70146551 -1.36409794 -0.10412912]
+15 0.1486 0.1667 [-1.43487692  0.58135254  0.95137246  1.05661641 -2.08565155 -0.67582128]
+16 0.1157 0.14 [-1.15754051  0.77776456  0.62637834  0.9397739  -1.85715543  0.12604622]
+17 0.1457 0.1733 [-1.07091286  0.4534306   0.9788532   0.66063116 -1.69308076  0.34908064]
+18 0.1229 0.1533 [-0.86019305  0.0634375   0.66607954  0.65119064 -1.9813613   0.10771826]
+19 0.21 0.19 [-0.94335564 -0.18789854 -0.05548611  0.75361015 -1.11273978  0.25070873]
+20 0.13 0.1233 [-0.71981427  0.11143276  0.05148688  0.68826428 -1.36013398  0.09707957]
+
+    \end{Verbatim}
+
+    Choose theta with least missclassification error.
+
+    \hypertarget{confusion-matrix}{%
+\subsubsection{Confusion Matrix}\label{confusion-matrix}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{X} \PY{o}{=} \PY{p}{(}\PY{n}{features}\PY{o}{\PYZhy{}}\PY{n}{features}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{features}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bias}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{labels}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{CF} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         \PY{n}{CF}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:}           Predicted 0  Predicted 1
+         Actual 0          583           51
+         Actual 1           56          310
+\end{Verbatim}
+            
+    \hypertarget{f1-score}{%
+\subsubsection{F1 Score}\label{f1-score}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{f1\PYZus{}score}\PY{p}{(}\PY{n}{CF}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} 0.8528198074277854
+\end{Verbatim}
+            
+    \hypertarget{inference}{%
+\subsubsection{Inference}\label{inference}}
+
+    The first dataset performs better using this model.
+
+Logistic regression can only classify linearly separable data. This
+might be the reason for poor performance of second data set. Data sample
+imbalance across classes also might be a reason.
+
+    \hypertarget{improvements}{%
+\subsubsection{Improvements}\label{improvements}}
+
+    One possible solution is by expanding the basis to include higher order
+terms of features into dataset. For further improvements remove features
+that seems to be independent by trial and error to get an optimum set of
+features.
+
+    \hypertarget{bonus}{%
+\subsubsection{Bonus}\label{bonus}}
+
+    Define function \texttt{basis\_expansion} to introduce second order
+terms into features set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{k}{def} \PY{n+nf}{basis\PYZus{}expansion}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{X}\PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{j}\PY{p}{)}\PY{p}{]}\PY{o}{=}\PY{n}{X}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{o}{*}\PY{n}{X}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{j}\PY{p}{]}
+             \PY{k}{return} \PY{n}{X}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{features} \PY{o}{=} \PY{n}{basis\PYZus{}expansion}\PY{p}{(}\PY{n}{features}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{p}{[}\PY{n}{train\PYZus{}X}\PY{p}{,} \PY{n}{test\PYZus{}X}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.7}\PY{o}{*}\PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{p}{[}\PY{n}{train\PYZus{}Y}\PY{p}{,} \PY{n}{test\PYZus{}Y}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.7}\PY{o}{*}\PY{n}{labels}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{X} \PY{o}{=} \PY{p}{(}\PY{n}{train\PYZus{}X}\PY{o}{\PYZhy{}}\PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bias}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{train\PYZus{}Y}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{X\PYZus{}t} \PY{o}{=} \PY{p}{(}\PY{n}{test\PYZus{}X}\PY{o}{\PYZhy{}}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X\PYZus{}t}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bias}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Y\PYZus{}t} \PY{o}{=} \PY{n}{test\PYZus{}Y}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{21}\PY{p}{)}
+         \PY{n}{theta\PYZus{}i} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{21}\PY{p}{)}
+         \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.1}
+         \PY{n}{test\PYZus{}cost} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{1}
+         \PY{k}{while} \PY{l+m+mi}{1}\PY{p}{:}
+             \PY{n}{theta\PYZus{}i} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{alpha}\PY{o}{*}\PY{n}{gradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+             \PY{n}{train\PYZus{}cost} \PY{o}{=} \PY{n}{cost}\PY{p}{(}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+             \PY{n}{temp} \PY{o}{=} \PY{n}{cost}\PY{p}{(}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X\PYZus{}t}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}t}\PY{p}{)}
+             \PY{k}{if} \PY{n}{temp}\PY{o}{\PYZgt{}}\PY{n}{test\PYZus{}cost}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{alpha}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.000001}\PY{p}{:}
+                     \PY{n}{alpha}\PY{o}{/}\PY{o}{=}\PY{l+m+mi}{10}
+                     \PY{k}{continue}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{break}
+             \PY{n}{test\PYZus{}cost} \PY{o}{=} \PY{n}{temp}
+             \PY{n}{theta} \PY{o}{=} \PY{n}{theta\PYZus{}i}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{train\PYZus{}cost}\PY{p}{,} \PY{n}{test\PYZus{}cost}\PY{p}{)}
+             \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2172 0.31701659943561133 0.33049671719211754
+2173 0.3170137281318014 0.33049671378561624
+2174 0.317010858048474 0.33049671066126163
+2175 0.3170079891848145 0.33049670781857965
+2176 0.3170051215400083 0.3304967052570955
+2177 0.3170022551132422 0.3304967029763375
+2178 0.3169993899037031 0.33049670097583295
+2179 0.3169965259105795 0.3304966992551112
+2180 0.3169936631330602 0.33049669781370267
+2181 0.3169908015703349 0.330496696651138
+2182 0.3169879412215944 0.33049669576695007
+2183 0.3169850820860298 0.33049669516067165
+2184 0.3169822241628334 0.33049669483183675
+2185 0.3169793674511981 0.3304966947799804
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train error : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test error : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}t}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}t}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train error :  0.09857142857142857
+Test error :  0.13333333333333333
+[-0.94683286  0.41616011  0.45021329  1.47993344 -0.74432487  0.12890708
+ -0.09742759  0.12086925  0.48203783 -0.32741465  0.03540156  0.21571053
+  0.41958038 -0.51383393  0.22243022 -0.09342475 -1.13939958 -0.06235577
+ -0.13042047 -0.43062858  0.12890708]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{X} \PY{o}{=} \PY{p}{(}\PY{n}{features}\PY{o}{\PYZhy{}}\PY{n}{features}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{features}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bias}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{labels}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{CF} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         \PY{n}{CF}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:}           Predicted 0  Predicted 1
+         Actual 0          591           43
+         Actual 1           66          300
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{f1\PYZus{}score}\PY{p}{(}\PY{n}{CF}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} 0.846262341325811
+\end{Verbatim}
+            
+    \hypertarget{feature-selection}{%
+\subsubsection{Feature Selection}\label{feature-selection}}
+
+    Drop features that are independent or irrelevant by trial and error.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{features} \PY{o}{=} \PY{n}{features}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{44}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{02}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{04}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{13}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{14}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{34}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{features} \PY{o}{=} \PY{n}{features}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{33}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{22}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{11}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{12}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{23}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}features = features.drop(columns=[\PYZsq{}03\PYZsq{}])\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{n}{features}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:}     age    tram   tomotr      anin  gen      00        01          03
+         0  31.0  2897.0  49741.0  339500.0  1.0   961.0   89807.0  10524500.0
+         1  46.0  2087.0  23953.0  935000.0  1.0  2116.0   96002.0  43010000.0
+         2  23.0  1814.0  26056.0  191700.0  0.0   529.0   41722.0   4409100.0
+         3  94.0   179.0  30250.0  715900.0  0.0  8836.0   16826.0  67294600.0
+         4  26.0  3995.0  39466.0  711900.0  0.0   676.0  103870.0  18509400.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{p}{[}\PY{n}{train\PYZus{}X}\PY{p}{,} \PY{n}{test\PYZus{}X}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.7}\PY{o}{*}\PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{p}{[}\PY{n}{train\PYZus{}Y}\PY{p}{,} \PY{n}{test\PYZus{}Y}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{labels}\PY{p}{,} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{0.7}\PY{o}{*}\PY{n}{labels}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{X} \PY{o}{=} \PY{p}{(}\PY{n}{train\PYZus{}X}\PY{o}{\PYZhy{}}\PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{train\PYZus{}X}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bias}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{train\PYZus{}Y}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{X\PYZus{}t} \PY{o}{=} \PY{p}{(}\PY{n}{test\PYZus{}X}\PY{o}{\PYZhy{}}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{test\PYZus{}X}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X\PYZus{}t}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bias}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Y\PYZus{}t} \PY{o}{=} \PY{n}{test\PYZus{}Y}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{)}
+         \PY{n}{theta\PYZus{}i} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{)}
+         \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.1}
+         \PY{n}{test\PYZus{}cost} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{1}
+         \PY{k}{while} \PY{l+m+mi}{1}\PY{p}{:}
+             \PY{n}{theta\PYZus{}i} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{alpha}\PY{o}{*}\PY{n}{gradient}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+             \PY{n}{train\PYZus{}cost} \PY{o}{=} \PY{n}{cost}\PY{p}{(}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+             \PY{n}{temp} \PY{o}{=} \PY{n}{cost}\PY{p}{(}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X\PYZus{}t}\PY{p}{,} \PY{n}{theta\PYZus{}i}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}t}\PY{p}{)}
+             \PY{k}{if} \PY{n}{temp}\PY{o}{\PYZgt{}}\PY{n}{test\PYZus{}cost}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{alpha}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.000001}\PY{p}{:}
+                     \PY{n}{alpha}\PY{o}{/}\PY{o}{=}\PY{l+m+mi}{10}
+                     \PY{k}{continue}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{break}
+             \PY{n}{theta} \PY{o}{=} \PY{n}{theta\PYZus{}i}
+             \PY{n}{test\PYZus{}cost} \PY{o}{=} \PY{n}{temp}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{train\PYZus{}cost}\PY{p}{,} \PY{n}{test\PYZus{}cost}\PY{p}{)}
+             \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1773 0.3266623137173051 0.3375566504135404
+1774 0.3266610703488829 0.337556641306663
+1775 0.3266598276220403 0.3375566328860763
+1776 0.3266585855363516 0.33755662515060625
+1777 0.3266573440913919 0.3375566180990825
+1778 0.32665610328673683 0.3375566117303371
+1779 0.32665486312196235 0.3375566060432051
+1780 0.32665362359664524 0.33755660103652485
+1781 0.32665238471036273 0.3375565967091372
+1782 0.3266511464626926 0.3375565930598866
+1783 0.32664990885321316 0.3375565900876198
+1784 0.32664867188150326 0.33755658779118713
+1785 0.3266474355471424 0.337556586169441
+1786 0.3266461998497103 0.3375565852212373
+1787 0.3266449647887878 0.33755658494543495
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train error : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test error : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{misclassification\PYZus{}error}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}t}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}t}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{theta}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train error :  0.09857142857142857
+Test error :  0.12666666666666668
+[-1.15077492  0.56165362  0.70445155  1.42492256 -1.94506542  0.12742219
+  0.13461665  0.19359139 -0.60572495]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{X} \PY{o}{=} \PY{p}{(}\PY{n}{features}\PY{o}{\PYZhy{}}\PY{n}{features}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{features}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bias}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{labels}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{CF} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         \PY{n}{CF}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:}           Predicted 0  Predicted 1
+         Actual 0          583           51
+         Actual 1           55          311
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{f1\PYZus{}score}\PY{p}{(}\PY{n}{CF}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} 0.8543956043956044
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
